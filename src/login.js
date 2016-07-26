@@ -82,14 +82,16 @@ var fn = {
       .then(function(data) {
         var body;
 
-        try {
-          body = JSON.parse(data.body);
-        } catch (err) {
-          return bPromise.reject(new Error('Error parsing body'));
-        }
+        if (data.body) {
+          try {
+            body = JSON.parse(data.body);
+          } catch (err) {
+            return bPromise.reject(new Error('Error parsing body'));
+          }
 
-        if (body.errors && body.errors.length) {
-          return bPromise.reject(new Error('Error logging in: ' + body.errors[0]));
+          if (body.errors && body.errors.length) {
+            return bPromise.reject(new Error('Error logging in: ' + body.errors[0]));
+          }
         }
 
         return data.response.headers['location'].split('ticket=')[1];
