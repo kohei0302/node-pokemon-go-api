@@ -26,7 +26,7 @@ var fn = {
 
     if (provider === 'google') {
       promise = login.google;
-    } else if (provider === 'pokemon-club') {
+    } else if (provider === 'ptc') {
       promise = login.pokemonClub;
     }
 
